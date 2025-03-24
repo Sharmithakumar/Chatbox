@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chatbox"></div>
+        <div id="input-area">
+            <input type="text" id="userinput" placeholder="Type a message.." onkeypress="handlekeypress(event)" >
+            <button onclick="sendMessage()">send</button>
+        </div>
+    </div>
+    <script>
+        function sendMessage()
+        {
+            var inputfield=document.getElementById("userinput")
+            var input=inputfield.value.trim()
+            if(input=="")
+        {
+            return
+        }
+        var chatbox=document.getElementById("chatbox")
+        var usermessage="<div class='message'>"+input+"</div>"
+        chatbox.innerHTML+=usermessage
+        inputfield.value=""
+        setTimeout(function()
+    {
+        var botresponse=gotbotresponse(input)
+        var botmessage="<div class='bot'>"+botresponse+"</div>"
+        chatbox.innerHTML+=botmessage
+       chatbox.scrollTop=chatbox.scrollHeight
+    },200)
+        }
+        function gotbotresponse(input)
+        {
+            var responses={
+                "hello":"hey there !!",
+                "epdi irukka":"nalla irukken",
+                "define chatbox":"A chatbox is the user interface of a given chat application",
+                "sharmitha":"yeshh"
+            };
+            var lowerinput=input.toLowerCase()
+            if(responses[lowerinput])
+            {
+                return responses[lowerinput]
+            }
+            else{
+                return "hii da !!.."
+            }
+        }
+            function handlekeypress(event)
+            {
+                if(event.key==="Enter")
+            {
+                sendMessage()
+            }
+            }
+    </script>
+</body>
+</html>
+<!-- note it down in classwork -->
